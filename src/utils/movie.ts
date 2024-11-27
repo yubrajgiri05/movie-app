@@ -1,12 +1,25 @@
+
+interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path?: string;
+  backdrop_path?: string;
+}
+
+interface MovieApiResponse {
+  page: number;
+  results: Movie[];
+  total_results: number;
+  total_pages: number;
+}
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxY2ViYTE1YzhlOTMwNmExNGMxZWQ3ZDUyYTRlNGFhMCIsIm5iZiI6MTczMjYxMjEwNC4xMTAzNDA0LCJzdWIiOiI2NzQ1OGRkMzgwYjQ0YTg5MzdiN2MzNDUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.f5pYhZOw9kt_ZFyPzWay-D1seZ2dOGJ43W7Mb5-a-A0";
 
 async function fetchFromAPI(endpoint: string, params: Record<string, string> = {}) {
   const url = new URL(`${API_BASE_URL}/${endpoint}`);
-  url.search = new URLSearchParams({
-    ...params,
-  }).toString();
+  url.search = new URLSearchParams({ ...params }).toString();
 
   const response = await fetch(url.toString(), {
     headers: {
@@ -22,15 +35,15 @@ async function fetchFromAPI(endpoint: string, params: Record<string, string> = {
   return response.json();
 }
 
-export async function fetchMovies(query?: string) {
+export async function fetchMovies(query?: string): Promise<Movie[]> {
   const endpoint = query ? "search/movie" : "discover/movie";
   const params = query
     ? { query, language: "en-US", page: "1" }
     : { language: "en-US", sort_by: "popularity.desc", page: "1" };
 
-  const data = await fetchFromAPI(endpoint, params);
+  const data: MovieApiResponse = await fetchFromAPI(endpoint, params);
 
-  return data.results.map((movie: any) => ({
+  return data.results.map((movie) => ({
     id: movie.id,
     title: movie.title,
     overview: movie.overview,
