@@ -3,7 +3,7 @@ interface Movie {
   id: number;
   title: string;
   overview: string;
-  poster_path?: string;
+  poster_path: string | null; 
   backdrop_path?: string;
 }
 
