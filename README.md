@@ -8,5 +8,8 @@ Additionally, the platform includes a search functionality, allowing users to se
 ```bash
 npm run dev
 ```
+![GAME](./movie1.JPG)
+![GAME](./movie2.JPG)
+
 
 
