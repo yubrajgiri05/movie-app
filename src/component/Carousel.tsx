@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link"; // Import Link for navigation
+import Link from "next/link";
 
 type Movie = {
   id: number;
@@ -10,12 +10,12 @@ type Movie = {
 };
 
 type MoviesGridProps = {
-  movies: Movie[]; // Ensuring movies is always an array
+  movies: Movie[]; 
 };
 
 const MoviesGrid: React.FC<MoviesGridProps> = ({ movies }) => {
   if (!movies || movies.length === 0) {
-    return <div>Loading movies...</div>; // Show loading text or an empty state
+    return <div>Loading movies...</div>; 
   }
 
   return (

@@ -7,13 +7,12 @@ type SearchBarProps = {
 export default function SearchBar({ onSearch }: SearchBarProps) {
   const [inputValue, setInputValue] = useState<string>("");
 
-  // Debounce input value
   useEffect(() => {
     const timer = setTimeout(() => {
       onSearch(inputValue);
-    }, 500); // 500ms delay for debouncing
+    }, 500); 
 
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+    return () => clearTimeout(timer); 
   }, [inputValue, onSearch]);
 
   return (
