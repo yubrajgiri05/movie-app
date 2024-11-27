@@ -10,7 +10,7 @@ type Movie = {
   title: string;
   overview: string;
   poster_path: string | null;
-  backdrop_path: string;
+  backdrop_path?: string; // Optional or string | null based on Fix 1 or 2
 };
 
 export default function Home() {
